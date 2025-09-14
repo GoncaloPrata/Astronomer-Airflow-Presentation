@@ -46,6 +46,7 @@ tabelas = {
 # -------------- #
 
 @dag(
+    dag_id="dag_tabelas_com_deps",
     start_date=datetime(2025, 4, 1),
     schedule="@daily",  
     max_consecutive_failed_dag_runs=5,

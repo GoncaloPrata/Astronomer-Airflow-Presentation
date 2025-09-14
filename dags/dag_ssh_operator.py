@@ -18,6 +18,7 @@ INPUT_PATH = "/usr/local/airflow/include/bank_data.csv"
 OUTPUT_DIR = "/usr/local/airflow/include/output"
 
 @dag(
+    dag_id="dag_ssh_operator",
     start_date=datetime(2025, 1, 1),
     schedule="@daily",
     catchup=False,

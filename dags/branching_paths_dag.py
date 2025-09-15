@@ -40,7 +40,7 @@ def branching_paths_dag():
     start = EmptyOperator(task_id="start")
 
     # Branching operator
-    branch = BranchPythonOperator(
+    branch = BranchPythonOperator( # Expects either a task_id or a list of task_ids to follow through
         task_id="branching_decision",
         python_callable=choose_path,
     )

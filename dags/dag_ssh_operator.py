@@ -19,6 +19,7 @@ OUTPUT_DIR = "/usr/local/airflow/include/output"
 
 @dag(
     dag_id="dag_ssh_operator",
+    doc_md=__doc__,
     start_date=datetime(2025, 1, 1),
     schedule="@daily",
     catchup=False,

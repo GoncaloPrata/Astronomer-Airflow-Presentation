@@ -28,7 +28,6 @@ def choose_path():
 
 @dag(
     dag_id="branching_paths_dag",
-    description="A DAG demonstrating branching paths based on a condition (Astronomer Airflow 3 style)",
     start_date=datetime(2025, 1, 1),
     doc_md=__doc__,
     catchup=False,

@@ -14,7 +14,7 @@ from airflow.operators.bash import BashOperator
 from pendulum import datetime
 
 # Paths
-INPUT_PATH = "/usr/local/airflow/include/bank_data.csv"
+INPUT_PATH = "/usr/local/airflow/include/input/bank_data.csv"
 OUTPUT_DIR = "/usr/local/airflow/include/output"
 
 @dag(
@@ -32,10 +32,10 @@ def dag_ssh_operator():
     wait_for_csv = FileSensor(
         task_id="wait_for_csv",
         fs_conn_id="fs_default",
-        filepath="include/bank_data.csv",
+        filepath="include/input/bank_data.csv",
         poke_interval=10,   # check every 10s
         timeout=600,        # fail after 10 min if file not found
-        mode="poke",
+        mode="poke", # poke (default) -> the worker is constantly allocated to this task ; reschedule -> the worker is only allocated during execution
     )
 
     create_output_dir_if_not_exists = BashOperator(

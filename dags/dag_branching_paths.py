@@ -15,7 +15,7 @@ from airflow.decorators import dag, task
 from airflow.operators.python import BranchPythonOperator
 from airflow.operators.empty import EmptyOperator
 from airflow.utils.trigger_rule import TriggerRule
-from pendulum import datetime
+from pendulum import datetime, duration
 
 # Function to decide which path to take
 def choose_path():
@@ -27,13 +27,19 @@ def choose_path():
     return chosen
 
 @dag(
-    dag_id="branching_paths_dag",
-    start_date=datetime(2025, 1, 1),
+    dag_id="dag_branching_paths",
+    start_date=datetime(2025, 4, 1),
+    schedule="@daily",  
+    max_consecutive_failed_dag_runs=5,
     doc_md=__doc__,
-    catchup=False,
+    default_args={
+        "owner": "Astro",
+        "retries": 3,
+        "retry_delay": duration(seconds=5),
+    },
+    is_paused_upon_creation=True,
     tags=["demo", "branching", "taskflow"],
 )
-
 def branching_paths_dag():
 
     start = EmptyOperator(task_id="start")

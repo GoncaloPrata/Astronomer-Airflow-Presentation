@@ -1,3 +1,21 @@
+"""
+## DAG Triggering Another DAG
+
+This DAG illustrates how one DAG can trigger the execution of another 
+DAG using Airflow’s TriggerDagRunOperator.
+
+After completing its initial tasks, this DAG triggers a separate DAG, 
+allowing workflows to be modular, coordinated, and independent. This 
+approach demonstrates Airflow’s ability to orchestrate multiple pipelines 
+and manage complex dependencies across DAGs.
+
+This DAG is useful for scenarios where tasks in one workflow must 
+initiate entirely separate pipelines, such as multi-stage ETL 
+processes or data delivery jobs.
+
+"""
+
+
 from airflow.decorators import dag, task
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
